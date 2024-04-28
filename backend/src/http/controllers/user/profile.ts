@@ -1,12 +1,22 @@
 import { Request, Response } from "express";
+import { prismaUserRepository } from "../../../database/prisma-user-repository";
 
 export async function ProfileController(req: Request, res: Response) {
     try {
 
-        const user = req.user
+        const userData = req.user
 
-        res
-            .json({ user })
+
+        const user = await prismaUserRepository.findById(userData.sub.id)
+
+        if (!user) {
+            throw new Error("Not have that user")
+        }
+
+        res.send({
+            auth: true,
+            user
+        })
 
     } catch (err: Error | any) {
         res

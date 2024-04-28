@@ -1,6 +1,9 @@
 import { useState } from 'react'
-import { createUser } from './api'
+import { authUser, createUser } from './api'
 import style from './style.module.css'
+import { useDispatch, useSelector } from 'react-redux'
+import { setAuth } from './redux/user/userSlice'
+import { RootState } from './redux/store'
 
 function Navbar() {
   return (
@@ -14,13 +17,47 @@ function Navbar() {
 }
 
 function SignIn() {
+
+  const [user, setUser] = useState({
+    email: "",
+    password: ""
+  })
+  const [loading, setLoading] = useState(false)
+
+  const dispatch = useDispatch()
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault()
+
+    try {
+      setLoading(true)
+      const { data } = await authUser({
+        email: user.email,
+        password: user.password
+      })
+
+      dispatch(setAuth(data))
+
+    } catch (err: any) {
+      if (err.response || err.response.status === 400) {
+        console.error(err)
+      }
+    } finally {
+      setLoading(false)
+      setUser({
+        email: "",
+        password: ""
+      })
+    }
+  }
+
   return (
     <main className={style.signIn}>
       <h1 className={style.layout_title}>Entrar</h1>
       <form>
-        <input type="email" placeholder='example@email.com' />
-        <input type="password" placeholder='******' />
-        <button>Entrar</button>
+        <input value={user.email} onChange={(e) => setUser({ ...user, email: e.target.value })} type="email" placeholder='example@email.com' />
+        <input value={user.password} onChange={(e) => setUser({ ...user, password: e.target.value })} type="password" placeholder='******' />
+        {loading ? <button>Loading</button> : <button onClick={handleLogin}>Entrar</button>}
       </form>
     </main>
   )
@@ -78,10 +115,15 @@ function SignUp() {
 }
 
 function Dashboard() {
+
+  const user = useSelector((state: RootState) => state.user)
+
+  console.log(user)
+
   return (
     <main className={style.dashboard}>
       <h1>Dashboard</h1>
-      <h2>Hi, user!</h2>
+      <h2>Hi,</h2>
     </main>
   )
 }
