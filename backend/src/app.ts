@@ -5,15 +5,14 @@ import cors from 'cors'
 
 const app = express()
 
-app.use(cors())
 app.use(cookieParser())
+app.use(cors({
+    credentials: true,
+    origin: 'http://localhost:3000'
+}))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
 app.use("/api/v1", UserRoutes)
-
-app.get('/', (req, res) => {
-    res.send("Home, hello")
-})
 
 export { app }

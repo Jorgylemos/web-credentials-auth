@@ -14,8 +14,14 @@ export async function RegisterController(req: Request, res: Response) {
         const email_regex = /[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}/igm.test(email)
         // const password_regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&_])[A-Za-z\d$@$!%*?&_]{minlength,maxlength}$/.test(password)
 
+        const emailAlreadyExists = await prismaUserRepository.findByEmail(email)
+
         if (!email_regex) {
             throw new Error("Email have a error.")
+        }
+
+        if (emailAlreadyExists) {
+            throw new Error("User already exists")
         }
 
         if (!password) {

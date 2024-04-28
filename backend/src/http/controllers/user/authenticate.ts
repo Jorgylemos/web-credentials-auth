@@ -71,6 +71,15 @@ export async function AuthController(req: Request, res: Response) {
                 secure: true,
             })
 
+        res
+            .status(200)
+            .json({
+                auth: true,
+                message: "Authenticated",
+                ...user,
+                password: undefined
+            })
+
     } catch (err: Error | any) {
         res
             .status(400)

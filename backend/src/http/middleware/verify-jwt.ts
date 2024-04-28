@@ -4,23 +4,25 @@ import * as Jwt from 'jsonwebtoken'
 const JWT_PAYLOAD = process.env.JWT_PAYLOAD as string
 
 export const VerifyJwt = (req: Request, res: Response, next: NextFunction) => {
-    const { access_token } = req.cookies
+    const { accessToken } = req.cookies
 
-    const prefix = access_token.split(' ')[0]
-    const token = access_token.split(' ')[1]
+    console.log(accessToken)
 
-    if (!prefix || prefix != 'Bearer') {
-        throw new Error("An error ocurred on token.")
-    }
+    // const prefix = accessToken.split(' ')[0]
+    // const token = accessToken.split(' ')[1]
 
-    if (!token) {
-        throw new Error("An error ocurred on token.")
-    }
+    // if (!prefix || prefix != 'Bearer') {
+    //     throw new Error("An error ocurred on token.")
+    // }
 
-    const _userToken = Jwt.verify(token, JWT_PAYLOAD)
+    // if (!token) {
+    //     throw new Error("An error ocurred on token.")
+    // }
 
-    req.user = _userToken
+    // const _userToken = Jwt.verify(token, JWT_PAYLOAD)
 
-    next()
+    // req.user = _userToken
+
+    // next()
 
 }

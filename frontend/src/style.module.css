@@ -1,0 +1,107 @@
+.layout_title {
+    font-size: 20px;
+    color: #ffffff;
+}
+
+/* Navbar */
+
+.navBar {
+    color: #ffffff;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.navBar span {
+    font-size: 20px;
+}
+
+.navBar nav {
+    font-size: 16px;
+}
+
+/* Sign In */
+
+.signIn {
+    flex: 1 1 0%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.signIn form {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.signIn form input {
+    outline: none;
+    min-width: 220px;
+    min-height: 32px;
+    border-radius: 4px;
+    background-color: crimson;
+}
+
+.signIn form input::placeholder {
+    color: black;
+    font-weight: lighter;
+}
+
+.signIn form button {
+    min-width: 220px;
+    border-radius: 4px;
+    background-color: #ffff;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+/* Sign Up */
+
+.signUp {
+    flex: 1 1 0%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.signUp form {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.signUp form input {
+    outline: none;
+    min-width: 220px;
+    min-height: 32px;
+    border-radius: 4px;
+    background-color: crimson;
+}
+
+.signUp form input::placeholder {
+    color: black;
+    font-weight: lighter;
+}
+
+.signUp form button {
+    min-height: 32px;
+    border-radius: 4px;
+    background-color: #ffff;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+/* Dashboard */
+
+.dashboard {
+    flex: 1 1 0%;
+    color: #ffffff;
+}
+
+.dashboard h1 {
+    font-size: 4vh;
+}
